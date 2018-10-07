@@ -1,0 +1,6 @@
+# python files
+*.pyc
+__pycache__
+
+# test files
+*.png
