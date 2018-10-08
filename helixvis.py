@@ -4,8 +4,9 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as pltcol
 from matplotlib.patches import Arc
 import math
+pd.options.mode.chained_assignment = None
 
-def draw_wheel(sequence, colors = ["gray", "yellow", "blue", "red"]):
+def draw_wheel(sequence, colors = ["gray", "yellow", "blue", "red"], showplot = False):
     "draw helix"
     min_num = 2
     max_num = 18
@@ -53,11 +54,12 @@ def draw_wheel(sequence, colors = ["gray", "yellow", "blue", "red"]):
         ax.add_artist(circle)
         
     plt.axis('off')
-    plt.show()
+    if showplot:
+        plt.show()
     
     return fig, ax
 
-def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"]):
+def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"], showplot = False):
     "draw wenxiang"
     min_num = 2
     max_num = 18
@@ -75,23 +77,28 @@ def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"]):
     for i in range(len(colors)):
         if colors[i] not in pltcol.cnames:
             return "ERROR: parameter `colors` has invalid colors." 
+            
     between_distance = 0.042
     start_radius = 0.0625
-    CENTER_X = 0.5
-    CENTER_Y = 0.52
-    df_spiral = pd.DataFrame(data={'end_angle': [0, 180] * 5, 'start_angle': [180, 360] * 5, 
-        'center_x': [CENTER_X, CENTER_X + between_distance] * 5, 'center_y': [CENTER_Y]* 10, 'radius': start_radius}) 
-    df_spiral['end_angle'][9] = 80
+    CENTER_Y = 0.5
+    CENTER_X = 0.52
+    df_spiral = pd.DataFrame(data={'end_angle': [90, 270] * 5, 'start_angle': [270, 90] * 5, 
+        'center_y': [CENTER_Y, CENTER_Y + between_distance] * 5, 'center_x': [CENTER_X]* 10, 'radius': start_radius}) 
+    df_spiral['start_angle'][9] = 190
     for i in range(10):
-        df_spiral['radius'][i] = start_radius + (i-1)* between_distance
+        df_spiral['radius'][i] = start_radius + i* between_distance
+        
+    #df_resid = pd.DataFrame(data={'y': df_spiral['center_y'] + df_spiral['radius'] * math.sin(100*math.pi/180), 'x': df_spiral['center_x'] + df_spiral['radius'] * math.cos(100*math.pi/180), 'color': 'blue', 'lettername': 'a'})  
+    df_resid = pd.DataFrame(data ={'y': np.array([0.5625, 0.4891, 0.4438, 
+        0.5943, 0.6122, 0.3878, 0.4478, 0.7191, 0.54, 0.2695, 
+        0.5893, 0.7955, 0.3428, 0.2689, 0.8151, 0.6993, 0.1255, 
+        0.4655]), 'x': np.array([0.52, 0.5816, 0.4843, 0.4295, 0.6142, 
+        0.6142, 0.3568, 0.4555, 0.747, 0.52, 0.2516, 0.6276, 
+        0.7924, 0.2908, 0.2908, 0.8651, 0.6563, 0.0862]), 'color': 'blue', 'lettername': 'a'})
+    df_resid = df_resid.iloc[range(num_resid)]
     resid_spiral = np.array([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 7, 8, 8, 9, 9, 10])    
     df_spiral = df_spiral.iloc[range(resid_spiral[num_resid-1])]
-    df_spiral['end_angle'][len(df_spiral)-1] = (df_spiral['start_angle'][len(df_spiral)-1] + (num_resid-1) * 100 - 180 * (resid_spiral[num_resid-1]-1))% 360
-    df_resid = pd.DataFrame(data={'y': np.array([0.5625, 0.4891, 0.4438, 0.5943, 0.6122, 0.3878, 0.4478, 0.7191, 0.54, 0.2695, 0.5893, 
-        0.7955, 0.3428, 0.2689, 0.8151, 0.6993, 0.1255, 0.4655]), 'x': np.array([0.52, 0.5816, 0.4843, 0.4295, 0.6142, 0.6142, 0.3568, 
-        0.4555, 0.747, 0.52, 0.2516, 0.6276, 0.7924, 0.2908, 0.2908, 0.8651, 0.6563, 0.0862]), 'color': 'blue', 'lettername': 'a'})
-    df_resid['x'] = 1-df_resid['x']
-    df_resid = df_resid.iloc[range(num_resid)]
+    df_spiral['start_angle'][len(df_spiral)-1] = (df_spiral['end_angle'][len(df_spiral)-1] - (num_resid-1) * 100 + 180 * (resid_spiral[num_resid-1]-1))% 360        
     for i in range(num_resid):
         if sequence[i] not in residues:
             return "ERROR: " + sequence[i] + " is not a valid one-letter code for an amino acid."
@@ -101,12 +108,14 @@ def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"]):
     fig, ax = plt.subplots()
     for i in range(resid_spiral[num_resid-1]):
         ax.add_patch(Arc((df_spiral['center_x'][i], df_spiral['center_y'][i]), 2*df_spiral['radius'][i], 2*df_spiral['radius'][i], theta1 = df_spiral['start_angle'][i], theta2 = df_spiral['end_angle'][i]))     
+
     for i in range(num_resid):
         circle = plt.Circle((df_resid['x'][i], df_resid['y'][i]), circle_radius, clip_on = False, zorder = 10, facecolor=df_resid['color'][i], edgecolor = 'black')
         ax.add_artist(circle)
-        
+    
     plt.axis('off')
-    plt.show()
+    if showplot:
+        plt.show()
     
     return fig, ax
     
