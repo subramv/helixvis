@@ -2,17 +2,18 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.colors as pltcol
+import matplotlib.patches as mpatches
 from matplotlib.patches import Arc
 import math
 pd.options.mode.chained_assignment = None
 
-def draw_wheel(sequence, colors = ["gray", "yellow", "blue", "red"], showplot = False):
+def draw_wheel(sequence, colors = ["gray", "yellow", "blue", "red"], legend = False):
     "draw helix"
     min_num = 2
     max_num = 18
     num_colors = 4
     num_resid = len(sequence)
-    # 0 = nonpolar, 1 = polar, 2 = basic, 3 = acidic
+    # 0 = hydrophobic, 1 = polar, 2 = basic, 3 = acidic
     residues = {"A":0, "R":2, "N":1, "D":3, "C":1,
                   "Q":1, "E":3, "G":0, "H":2, "I":0,
                   "L":0, "K":2, "M":0, "F":0, "P":0,
@@ -36,11 +37,12 @@ def draw_wheel(sequence, colors = ["gray", "yellow", "blue", "red"], showplot = 
     y_center = y_center/2 + 0.5
     circle_radius = 0.0725
     circle_data = pd.DataFrame(data={'x': x_center[0:num_resid], 
-        'y': y_center[0:num_resid], 'color': range(num_resid)})
+        'y': y_center[0:num_resid], 'color': range(num_resid), 'type': range(num_resid)})
     for i in range(num_resid):
         if sequence[i] not in residues:
             return "ERROR: " + sequence[i] + " is not a valid one-letter code for an amino acid."
         circle_data['color'][i] = colors[residues[sequence[i]]]
+        circle_data['type'][i] = residues[sequence[i]]
         
     segment_data = pd.DataFrame(data={'xstart': x_center[0:num_resid - 1], 
         'ystart': y_center[0:num_resid - 1], 'xend': x_center[1:num_resid], 
@@ -53,13 +55,40 @@ def draw_wheel(sequence, colors = ["gray", "yellow", "blue", "red"], showplot = 
         circle = plt.Circle((circle_data['x'][i], circle_data['y'][i]), circle_radius, clip_on = False, zorder = 10, facecolor=circle_data['color'][i], edgecolor = 'black')
         ax.add_artist(circle)
         
+    if legend:
+        restypes = set(circle_data['type'])
+        handleid = []
+        nonpolar = mpatches.Patch(color = colors[0], label = 'hydrophobic')
+        polar = mpatches.Patch(color = colors[1], label = 'polar')
+        basic = mpatches.Patch(color = colors[2], label = 'basic')
+        acidic = mpatches.Patch(color = colors[3], label = 'acidic')
+        if 0 in restypes:
+            handleid = [nonpolar]
+            
+        if 1 in restypes:
+            if bool(handleid):
+                handleid.append(polar)
+            else:
+                handleid = [polar]
+                
+        if 2 in restypes:
+            if bool(handleid):
+                handleid.append(basic)
+            else:
+                handleid = [basic]
+        
+        if 3 in restypes:
+            if bool(handleid):
+                handleid.append(acidic)
+            else:
+                handleid = [acidic]
+                
+        plt.legend(handles = handleid, loc='center left', bbox_to_anchor=(1.04, 0.5))
+        
     plt.axis('off')
-    if showplot:
-        plt.show()
-    
     return fig, ax
 
-def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"], showplot = False):
+def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"], legend = False):
     "draw wenxiang"
     min_num = 2
     max_num = 18
@@ -88,13 +117,12 @@ def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"], showplot
     for i in range(10):
         df_spiral['radius'][i] = start_radius + i* between_distance
         
-    #df_resid = pd.DataFrame(data={'y': df_spiral['center_y'] + df_spiral['radius'] * math.sin(100*math.pi/180), 'x': df_spiral['center_x'] + df_spiral['radius'] * math.cos(100*math.pi/180), 'color': 'blue', 'lettername': 'a'})  
     df_resid = pd.DataFrame(data ={'y': np.array([0.5625, 0.4891, 0.4438, 
         0.5943, 0.6122, 0.3878, 0.4478, 0.7191, 0.54, 0.2695, 
         0.5893, 0.7955, 0.3428, 0.2689, 0.8151, 0.6993, 0.1255, 
         0.4655]), 'x': np.array([0.52, 0.5816, 0.4843, 0.4295, 0.6142, 
         0.6142, 0.3568, 0.4555, 0.747, 0.52, 0.2516, 0.6276, 
-        0.7924, 0.2908, 0.2908, 0.8651, 0.6563, 0.0862]), 'color': 'blue', 'lettername': 'a'})
+        0.7924, 0.2908, 0.2908, 0.8651, 0.6563, 0.0862]), 'color': 'blue', 'lettername': 'a', 'type': -5})
     df_resid = df_resid.iloc[range(num_resid)]
     resid_spiral = np.array([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 7, 8, 8, 9, 9, 10])    
     df_spiral = df_spiral.iloc[range(resid_spiral[num_resid-1])]
@@ -104,6 +132,7 @@ def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"], showplot
             return "ERROR: " + sequence[i] + " is not a valid one-letter code for an amino acid."
         df_resid['color'][i] = colors[residues[sequence[i]]]
         df_resid['lettername'][i] = sequence[i]
+        df_resid['type'][i] = residues[sequence[i]]
     
     fig, ax = plt.subplots()
     for i in range(resid_spiral[num_resid-1]):
@@ -113,9 +142,36 @@ def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"], showplot
         circle = plt.Circle((df_resid['x'][i], df_resid['y'][i]), circle_radius, clip_on = False, zorder = 10, facecolor=df_resid['color'][i], edgecolor = 'black')
         ax.add_artist(circle)
     
-    plt.axis('off')
-    if showplot:
-        plt.show()
-    
+    if legend:
+        restypes = set(df_resid['type'])
+        handleid = []
+        nonpolar = mpatches.Patch(color = colors[0], label = 'hydrophobic')
+        polar = mpatches.Patch(color = colors[1], label = 'polar')
+        basic = mpatches.Patch(color = colors[2], label = 'basic')
+        acidic = mpatches.Patch(color = colors[3], label = 'acidic')
+        if 0 in restypes:
+            handleid = [nonpolar]
+            
+        if 1 in restypes:
+            if bool(handleid):
+                handleid.append(polar)
+            else:
+                handleid = [polar]
+                
+        if 2 in restypes:
+            if bool(handleid):
+                handleid.append(basic)
+            else:
+                handleid = [basic]
+        
+        if 3 in restypes:
+            if bool(handleid):
+                handleid.append(acidic)
+            else:
+                handleid = [acidic]
+                
+        plt.legend(handles = handleid, loc='center left', bbox_to_anchor=(1.04, 0.5))
+        
+    plt.axis('off')    
     return fig, ax
     
