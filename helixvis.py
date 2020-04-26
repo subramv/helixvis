@@ -7,7 +7,7 @@ from matplotlib.patches import Arc
 import math
 pd.options.mode.chained_assignment = None
 
-def draw_wheel(sequence, colors = ["gray", "yellow", "blue", "red"], legend = False):
+def draw_wheel(sequence, colors = ["gray", "yellow", "blue", "red"], labels = False, labelcolor = "black", legend = False):
     "draw helix"
     min_num = 2
     max_num = 18
@@ -54,6 +54,9 @@ def draw_wheel(sequence, colors = ["gray", "yellow", "blue", "red"], legend = Fa
     for i in range(num_resid):
         circle = plt.Circle((circle_data['x'][i], circle_data['y'][i]), circle_radius, clip_on = False, zorder = 10, facecolor=circle_data['color'][i], edgecolor = 'black')
         ax.add_artist(circle)
+        if labels:
+            ax.annotate(sequence[i], xy=(circle_data['x'][i], circle_data['y'][i]), zorder = 15, fontsize=10, ha="center", va = "center", color = labelcolor)
+        
         
     if legend:
         restypes = set(circle_data['type'])
@@ -88,7 +91,7 @@ def draw_wheel(sequence, colors = ["gray", "yellow", "blue", "red"], legend = Fa
     plt.axis('off')
     return fig, ax
 
-def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"], legend = False):
+def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"], labels = False, labelcolor = "black", legend = False):
     "draw wenxiang"
     min_num = 2
     max_num = 18
@@ -122,7 +125,7 @@ def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"], legend =
         0.5893, 0.7955, 0.3428, 0.2689, 0.8151, 0.6993, 0.1255, 
         0.4655]), 'x': np.array([0.52, 0.5816, 0.4843, 0.4295, 0.6142, 
         0.6142, 0.3568, 0.4555, 0.747, 0.52, 0.2516, 0.6276, 
-        0.7924, 0.2908, 0.2908, 0.8651, 0.6563, 0.0862]), 'color': 'blue', 'lettername': 'a', 'type': -5})
+        0.7924, 0.2908, 0.2908, 0.8651, 0.6563, 0.0862]), 'color': 'blue', 'type': -5})
     df_resid = df_resid.iloc[range(num_resid)]
     resid_spiral = np.array([1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 7, 8, 8, 9, 9, 10])    
     df_spiral = df_spiral.iloc[range(resid_spiral[num_resid-1])]
@@ -131,7 +134,7 @@ def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"], legend =
         if sequence[i] not in residues:
             return "ERROR: " + sequence[i] + " is not a valid one-letter code for an amino acid."
         df_resid['color'][i] = colors[residues[sequence[i]]]
-        df_resid['lettername'][i] = sequence[i]
+    #    df_resid['lettername'][i] = sequence[i]
         df_resid['type'][i] = residues[sequence[i]]
     
     fig, ax = plt.subplots()
@@ -141,6 +144,8 @@ def draw_wenxiang(sequence, colors = ["gray", "yellow", "blue", "red"], legend =
     for i in range(num_resid):
         circle = plt.Circle((df_resid['x'][i], df_resid['y'][i]), circle_radius, clip_on = False, zorder = 10, facecolor=df_resid['color'][i], edgecolor = 'black')
         ax.add_artist(circle)
+        if labels:
+            ax.annotate(sequence[i], xy=(df_resid['x'][i], df_resid['y'][i]), zorder = 15, fontsize=10, ha="center", va = "center", color = labelcolor)
     
     if legend:
         restypes = set(df_resid['type'])
