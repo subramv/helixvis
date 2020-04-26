@@ -1,6 +1,6 @@
 from setuptools import setup
 
-with open("README", 'r') as f:
+with open("README.MD", 'r') as f:
     long_description = f.read()
 
 setup(
