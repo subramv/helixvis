@@ -12,7 +12,7 @@ Programmatic generation of helical wheels in open source Python provides multipl
 * programmatic customization of visualizations
 * reproducibility: practically zero manual steps required for design and creation of helical wheels and wenxiang diagrams
 
-This is a port of R package helixvis into Python.
+This is a port of R package `helixvis` into Python.
 
 ## Installation
 
