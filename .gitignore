@@ -5,3 +5,4 @@ __pycache__
 # test files
 *.png
 *.jpg
+test.py
