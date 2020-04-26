@@ -10,9 +10,19 @@ setup(
    license="GPL-3",
    long_description=long_description,
    long_description_content_type= 'text/markdown', 
+   classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Programming Language :: Python',
+        'Topic :: Scientific/Engineering :: Chemistry',
+      ],
+    project_urls={
+        'Homepage': "https://pypi.org/project/helixvis/",
+        'Source Code': "https://github.com/subramv1/helixvis",
+        'Documentation':,
+    },
    author='Vigneshwar Subramanian, Raoul Wadhwa, Regina Stevens-Truss',
    author_email='vxs294@case.edu',
-   url="https://pypi.org/project/helixvis/",
    packages=['helixvis'],  
    install_requires=['numpy', 'pandas', 'matplotlib'], 
 )
