@@ -20,7 +20,7 @@ The source code is currently hosted on GitHub at: https://github.com/subramv1/he
 
 helixvis can be found on the Python package index at: https://pypi.org/project/helixvis/
 
-The most up=to-date release can be installed as follows:
+The most up-to-date release can be installed as follows:
 
 ```python
 python -m pip install -U pip
