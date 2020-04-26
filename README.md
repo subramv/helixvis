@@ -20,6 +20,12 @@ The source code is currently hosted on GitHub at: https://github.com/subramv1/he
 
 Binary installers can be found on the Python package index at: https://pypi.org/project/helixvis/
 
+## Dependencies
+
+* NumPy
+* Pandas
+* Matplotlib
+
 ## Usage
 
 ```
@@ -32,6 +38,9 @@ draw_wheel("ADEKLGSRTW")
 # make wenxiang diagram for "ADEKLGSRTW"
 draw_wenxiang("ADEKLGSRTW")
 ```
+## License
+
+GPL-3
 
 ## Contributions
 
