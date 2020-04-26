@@ -2,7 +2,7 @@
 
 ## Purpose
 
-helixvis can be used to create publication-quality, 2-dimensional visualizations of alpha-helical peptide sequences.
+Built by the lab of Regina Stevens-Truss, PhD (Professor & Chair, Department of Chemistry, Kalamazoo College), helixvis can be used to create publication-quality, 2-dimensional visualizations of alpha-helical peptide sequences.
 Specifically, this package allows the user to programmatically generate helical wheels and wenxiang diagrams to provide a bird's eye, top-down view of alpha-helical oligopeptides.
 Although other tools exist to complete this task, they generally provide a graphical user interface for manual input of peptide sequences, without allowing for programmatic creation and customization of visualizations.
 Programmatic generation of helical wheels in open source Python provides multiple benefits, including:
@@ -12,20 +12,25 @@ Programmatic generation of helical wheels in open source Python provides multipl
 * programmatic customization of visualizations
 * reproducibility: practically zero manual steps required for design and creation of helical wheels and wenxiang diagrams
 
-## Installation and Use
+This is a port of R package helixvis into Python.
 
-The following Terminal code can be used to take advantage of the current functionality of helixvis.
+## Installation
+
+The source code is currently hosted on GitHub at: https://github.com/subramv1/helixvis
+
+Binary installers can be found on the Python package index at: https://pypi.org/project/helixvis/
+
+## Usage
 
 ```
-# clone GitHub repo
-git clone https://github.com/subramv1/helixvis
-cd helixvis
+# load helixvis
+import helixvis
 
 # make helical wheel for "ADEKLGSRTW"
-python3 draw_wheel.py ADEKLGSRTW
+draw_wheel("ADEKLGSRTW")
 
 # make wenxiang diagram for "ADEKLGSRTW"
-python3 draw_wenxiang.py ADEKLGSRTW
+draw_wenxiang("ADEKLGSRTW")
 ```
 
 ## Contributions
