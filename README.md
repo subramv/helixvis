@@ -28,16 +28,17 @@ Binary installers can be found on the Python package index at: https://pypi.org/
 
 ## Usage
 
-```
+```python   
 # load helixvis
 import helixvis
 
 # make helical wheel for "ADEKLGSRTW"
-draw_wheel("ADEKLGSRTW")
+helixvis.draw_wheel("ADEKLGSRTW")
 
 # make wenxiang diagram for "ADEKLGSRTW"
-draw_wenxiang("ADEKLGSRTW")
+helixvis.draw_wenxiang("ADEKLGSRTW")
 ```
+
 ## License
 
 GPL-3
