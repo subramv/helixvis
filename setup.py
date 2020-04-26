@@ -19,7 +19,7 @@ setup(
     project_urls={
         'Homepage': "https://pypi.org/project/helixvis/",
         'Source Code': "https://github.com/subramv1/helixvis",
-        'Documentation':,
+        'Documentation': "https://github.com/subramv1/helixvis/blob/master/DOCUMENTATION.md",
     },
    author='Vigneshwar Subramanian, Raoul Wadhwa, Regina Stevens-Truss',
    maintainer_email='vxs294@case.edu',
