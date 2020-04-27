@@ -620,7 +620,7 @@ copy of the Program in return for a fee.
 
                      END OF TERMS AND CONDITIONS
 
-    helixvis: visualizing alpha-helical peptides in R
+    helixvis: visualizing alpha-helical peptides in Python
     Copyright (C) 2018 Vigneshwar Subramanian
 
     This program is free software: you can redistribute it and/or modify
