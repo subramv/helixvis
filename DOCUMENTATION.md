@@ -29,7 +29,10 @@ With helixvis, generating helical wheels takes a single line of code, as follows
 
 ```python
 # draw helical wheel
-helixvis.draw_wheel("GLLGPLLKIAAKVGSNLL")
+fig, ax = helixvis.draw_wheel("GLLGPLLKIAAKVGSNLL")
+# set aspect ratio to show circles
+ax.set_aspect('equal')
+#show plot
 plt.show()
 ```
 
@@ -39,8 +42,11 @@ The one-letter code for each residue can also be overlaid on each residue by set
 
 ```python
 # draw helical wheel with custom color scheme
-helixvis.draw_wheel("GLLGPLLKIAAKVGSNLL", colors = ["pink", "orange", "white", "black"],
+fig, ax = helixvis.draw_wheel("GLLGPLLKIAAKVGSNLL", colors = ["pink", "orange", "white", "black"],
        labels = True, labelcolor = "blue")
+# set aspect ratio to show circles
+ax.set_aspect('equal')
+#show plot
 plt.show()
 ```
 
@@ -55,11 +61,17 @@ The following code blocks and figures reproduce the figures from the Helical Whe
 ```python
 
 # draw wenxiang diagram
-helixvis.draw_wenxiang("GLLGPLLKIAAKVGSNLL")
+fig, ax = helixvis.draw_wenxiang("GLLGPLLKIAAKVGSNLL")
+# set aspect ratio to show circles
+ax.set_aspect('equal')
+#show plot
 plt.show()
 
-# draw wenxiang diagram with custom color scheme
+# draw wenxiang diagram with custom color scheme, labels, and legend
 draw_wenxiang("GLLGPLLKIAAKVGSNLL", colors = ["pink", "orange", "white", "black"],
-       labels = True, labelcolor = "blue")
-plt.show()
+       labels = True, labelcolor = "blue", legend = True)
+       # set aspect ratio to show circles
+ax.set_aspect('equal')
+# save to file
+fig.savefig('sample_wenxiang.png', bbox_inches = 'tight')
 ```
