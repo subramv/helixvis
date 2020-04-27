@@ -27,7 +27,7 @@ Built by the lab of Regina Stevens-Truss, PhD (Professor & Chair, Department of 
     - programmatic customization of visualizations
     - reproducibility: practically zero manual steps required for design and creation of helical wheels and wenxiang diagrams
 
-This is a port of R package helixvis into Python.
+This is a port of R package helixvis into Python. See https://doi.org/10.21105/joss.01008 for more details.
 
 """
 
