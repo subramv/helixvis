@@ -5,7 +5,7 @@ with open("README.MD", 'r') as f:
 
 setup(
    name='helixvis',
-   version='0.1.0',
+   version='0.1.0.RC2',
    description='Create 2-dimensional visualizations of alpha-helical peptide sequences',
    license="GPL-3",
    long_description=long_description,
