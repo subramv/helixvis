@@ -61,4 +61,5 @@ plt.show()
 # draw wenxiang diagram with custom color scheme
 draw_wenxiang("GLLGPLLKIAAKVGSNLL", colors = ["pink", "orange", "white", "black"],
        labels = True, labelcolor = "blue")
+plt.show()
 ```
