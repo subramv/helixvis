@@ -32,7 +32,7 @@ With helixvis, generating helical wheels takes a single line of code, as follows
 fig, ax = helixvis.draw_wheel("GLLGPLLKIAAKVGSNLL")
 # set aspect ratio to show circles
 ax.set_aspect('equal')
-#show plot
+# show plot
 plt.show()
 ```
 
@@ -46,7 +46,7 @@ fig, ax = helixvis.draw_wheel("GLLGPLLKIAAKVGSNLL", colors = ["pink", "orange", 
        labels = True, labelcolor = "blue")
 # set aspect ratio to show circles
 ax.set_aspect('equal')
-#show plot
+# show plot
 plt.show()
 ```
 
@@ -64,13 +64,13 @@ The following code blocks and figures reproduce the figures from the Helical Whe
 fig, ax = helixvis.draw_wenxiang("GLLGPLLKIAAKVGSNLL")
 # set aspect ratio to show circles
 ax.set_aspect('equal')
-#show plot
+# show plot
 plt.show()
 
 # draw wenxiang diagram with custom color scheme, labels, and legend
-draw_wenxiang("GLLGPLLKIAAKVGSNLL", colors = ["pink", "orange", "white", "black"],
+fig, ax = draw_wenxiang("GLLGPLLKIAAKVGSNLL", colors = ["pink", "orange", "white", "black"],
        labels = True, labelcolor = "blue", legend = True)
-       # set aspect ratio to show circles
+# set aspect ratio to show circles
 ax.set_aspect('equal')
 # save to file
 fig.savefig('sample_wenxiang.png', bbox_inches = 'tight')
