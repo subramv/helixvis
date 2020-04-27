@@ -89,4 +89,5 @@ def draw_wheel(sequence, colors = ["gray", "yellow", "blue", "red"], labels = Fa
         plt.legend(handles = handleid, loc='center left', bbox_to_anchor=(1.04, 0.5))
         
     plt.axis('off')
+    ax.set_aspect('equal')
     return fig, ax
