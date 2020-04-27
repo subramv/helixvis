@@ -68,7 +68,7 @@ ax.set_aspect('equal')
 plt.show()
 
 # draw wenxiang diagram with custom color scheme, labels, and legend
-fig, ax = draw_wenxiang("GLLGPLLKIAAKVGSNLL", colors = ["pink", "orange", "white", "black"],
+fig, ax = helixvis.draw_wenxiang("GLLGPLLKIAAKVGSNLL", colors = ["pink", "orange", "white", "black"],
        labels = True, labelcolor = "blue", legend = True)
 # set aspect ratio to show circles
 ax.set_aspect('equal')
