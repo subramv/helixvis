@@ -1,7 +1,7 @@
 name = "helixvis"
 
 # Check for dependencies
-dependencies = ("numpy", "pandas", "matplotlib", "dateutil")
+dependencies = ("numpy", "pandas", "matplotlib")
 missing = []
 
 for mod in dependencies:
@@ -12,7 +12,7 @@ for mod in dependencies:
 
 if missing:
     raise ImportError(
-        "Missing required dependencies {0}".format(missing))
+        "Issue with required dependencies {0}".format(missing))
 del dependencies, mod, missing
 
 from .draw_wheel import draw_wheel
