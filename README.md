@@ -16,7 +16,7 @@ This is a port of R package `helixvis` into Python. See https://doi.org/10.21105
 
 ## Installation
 
-The source code is currently hosted on GitHub at: https://github.com/subramv1/helixvis
+The source code is currently hosted on GitHub at: https://github.com/subramv/helixvis
 
 helixvis can be found on the Python package index at: https://pypi.org/project/helixvis/
 
@@ -54,5 +54,5 @@ GPL-3
 ## Contributions
 
 
-Please report any bugs, suggestions, etc. on the [issues page](https://github.com/subramv1/helixvis/issues) of the [helixvis GitHub repository](https://github.com/subramv1/helixvis).
+Please report any bugs, suggestions, etc. on the [issues page](https://github.com/subramv/helixvis/issues) of the [helixvis GitHub repository](https://github.com/subramv/helixvis).
 Contributions (bug fixes, new features, etc.) are welcome via pull requests (generally from forked repositories).

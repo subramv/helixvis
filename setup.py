@@ -17,9 +17,9 @@ setup(
         'Topic :: Scientific/Engineering :: Chemistry',
       ],
    project_urls={
-        'Bug Tracker': "https://github.com/subramv1/helixvis/issues",
-        'Documentation': "https://github.com/subramv1/helixvis/blob/master/DOCUMENTATION.md",
-        'Source Code': "https://github.com/subramv1/helixvis",
+        'Bug Tracker': "https://github.com/subramv/helixvis/issues",
+        'Documentation': "https://github.com/subramv/helixvis/blob/master/DOCUMENTATION.md",
+        'Source Code': "https://github.com/subramv/helixvis",
     },
    url = "https://pypi.org/project/helixvis/",
    author='Vigneshwar Subramanian, Raoul Wadhwa, Regina Stevens-Truss',
